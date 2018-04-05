@@ -361,7 +361,7 @@ def save_results(res_matrix, parameters, dirname, filename):
 #
 # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
 #label_to_tokens = get_label_to_tokens(r'C:\Users\20176817\Documents\CloudArticle\vladimir\vladimir\apt\tuples')
-anthony_corpus = read_anthony_data(r'C:\Users\20176817\Documents\CloudArticle\yaml\training', union = False)
+anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False)
 label_to_tokens = transform_anthony_intersection(anthony_corpus)
 # Filter out labels given by yum that refer to i686 architecture
 label_to_tokens = {k: v for k, v in label_to_tokens.items() if k[-5:] != '.i686'}
@@ -386,7 +386,7 @@ rules = get_rules(label_to_tokens, token_to_labels, label_to_token_groups, limit
 #del label_to_tokens
 
 # Read Anthony's data
-anthony_data = read_anthony_data(r'C:\Users\20176817\Documents\CloudArticle\yaml\testing')
+anthony_data = read_anthony_data(r'/mnt/data/repository/testing/')
 # Filter out rules for labels that are not in Anthony's data
 rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
 # Check the rule on data. If nothing is printed it's good.
@@ -397,5 +397,5 @@ param_list = [0.025, 0.075, 0.125, 0.175, 0.225, 0.275, 0.325, 0.375, 0.425, 0.4
 res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
 
 parameters['training_set'] = 'anthony-intersect-training'
-save_results(res_matrix, parameters, r'C:\Users\20176817\Documents\CloudArticle\results',
+save_results(res_matrix, parameters, r'/mnt/data/results/repository',
              filename = parameters['training_set'] + '_' + str(round(parameters['avg_num_rules']))  + '_' + str(parameters['threshold']))
