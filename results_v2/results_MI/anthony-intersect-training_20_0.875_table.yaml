@@ -1,0 +1,22 @@
+django: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 150}
+lighttpd: {f1-score: 0.9837133550488599, false_negative: 0, false_positive: 5, precision: 0.967948717948718,
+  recall: 1.0, true_positive: 151}
+mosh: {f1-score: 0.993421052631579, false_negative: 0, false_positive: 2, precision: 0.9869281045751634,
+  recall: 1.0, true_positive: 151}
+nmap: {f1-score: 0.9834983498349835, false_negative: 2, false_positive: 3, precision: 0.9802631578947368,
+  recall: 0.9867549668874173, true_positive: 149}
+p7zip: {f1-score: 0.9900990099009901, false_negative: 1, false_positive: 2, precision: 0.9868421052631579,
+  recall: 0.9933774834437086, true_positive: 150}
+subversion: {f1-score: 0.9966996699669968, false_negative: 0, false_positive: 1, precision: 0.993421052631579,
+  recall: 1.0, true_positive: 151}
+total: {f1-score: 0.9880715705765407, false_negative: 18, false_positive: 18, precision: 0.9880715705765407,
+  recall: 0.9880715705765407, true_positive: 1491}
+trac: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+vsftpd: {f1-score: 0.9444444444444445, false_negative: 15, false_positive: 1, precision: 0.9927007299270073,
+  recall: 0.9006622516556292, true_positive: 136}
+wget: {f1-score: 0.993421052631579, false_negative: 0, false_positive: 2, precision: 0.9869281045751634,
+  recall: 1.0, true_positive: 151}
+wordpress: {f1-score: 0.993421052631579, false_negative: 0, false_positive: 2, precision: 0.9869281045751634,
+  recall: 1.0, true_positive: 151}

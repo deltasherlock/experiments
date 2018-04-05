@@ -1,0 +1,12 @@
+bash: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 302}
+glibc: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 302}
+linux: {f1-score: 0.8064085447263017, false_negative: 0, false_positive: 145, precision: 0.6756152125279642,
+  recall: 1.0, true_positive: 302}
+openssl: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 302}
+python: {f1-score: 0.6840958605664489, false_negative: 145, false_positive: 0, precision: 1.0,
+  recall: 0.5198675496688742, true_positive: 157}
+total: {f1-score: 0.9039735099337748, false_negative: 145, false_positive: 145, precision: 0.9039735099337748,
+  recall: 0.9039735099337748, true_positive: 1365}

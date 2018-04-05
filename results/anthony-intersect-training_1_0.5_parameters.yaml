@@ -1,0 +1,28 @@
+avg_num_files: 144.8181818181818
+avg_num_rules: 1.0
+num_files: {amanda-server: 151, arpwatch: 151, autotrace: 151, bacula-client: 151,
+  bind9: 151, cdparanoia: 151, chrony: 151, cobertura: 151, crash: 151, crda: 151,
+  cups: 8, dcraw: 151, docker: 151, dovecot-core: 151, dstat: 151, dwz: 151, emacs-nox: 151,
+  finger: 151, freeradius: 151, gitweb: 151, gpm: 151, iotop: 151, iptraf-ng: 151,
+  ipvsadm: 151, ksh: 151, lftp: 151, lm-sensors: 151, logwatch: 151, lshw: 151, lynx: 151,
+  mailman: 151, mariadb-server: 151, marisa: 151, mc: 151, memcached: 151, mgetty-voice: 151,
+  mksh: 151, mrtg: 151, mstflint: 151, mtr: 151, mutt: 151, nasm: 151, nmap: 151,
+  paps: 151, pax: 151, pesign: 151, php: 151, powertop: 151, qemu-kvm: 151, qrencode: 151,
+  quagga: 151, quota: 151, rdist: 151, rrdtool: 151, samba: 151, sane: 151, smartmontools: 151,
+  spamassassin: 8, squid: 151, subversion: 151, supermin: 151, sysstat: 151, tcsh: 151,
+  telnetd: 151, tftpd-hpa: 39, tomcat7: 151, traceroute: 151, transfig: 151, tree: 151,
+  tshark: 73, unbound: 151, units: 151, virt-top: 151, vsftpd: 151, watchdog: 151,
+  wget: 151, zsh: 151}
+num_rules: {amanda-server: 1, arpwatch: 1, autotrace: 1, bacula-client: 1, bind9: 1,
+  cdparanoia: 1, chrony: 1, cobertura: 1, crash: 1, crda: 1, cups: 1, dcraw: 1, docker: 1,
+  dovecot-core: 1, dstat: 1, dwz: 1, emacs-nox: 1, finger: 1, freeradius: 1, gitweb: 1,
+  gpm: 1, iotop: 1, iptraf-ng: 1, ipvsadm: 1, ksh: 1, lftp: 1, lm-sensors: 1, logwatch: 1,
+  lshw: 1, lynx: 1, mailman: 1, mariadb-server: 1, marisa: 1, mc: 1, memcached: 1,
+  mgetty-voice: 1, mksh: 1, mrtg: 1, mstflint: 1, mtr: 1, mutt: 1, nasm: 1, nmap: 1,
+  paps: 1, pax: 1, pesign: 1, php: 1, powertop: 1, qemu-kvm: 1, qrencode: 1, quagga: 1,
+  quota: 1, rdist: 1, rrdtool: 1, samba: 1, sane: 1, smartmontools: 1, spamassassin: 1,
+  squid: 1, subversion: 1, supermin: 1, sysstat: 1, tcsh: 1, telnetd: 1, tftpd-hpa: 1,
+  tomcat7: 1, traceroute: 1, transfig: 1, tree: 1, tshark: 1, unbound: 1, units: 1,
+  virt-top: 1, vsftpd: 1, watchdog: 1, wget: 1, zsh: 1}
+threshold: 0.5
+training_set: anthony-intersect-training

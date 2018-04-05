@@ -1,0 +1,6 @@
+avg_num_files: 302.0
+avg_num_rules: 20.0
+num_files: {bash: 302, glibc: 302, linux: 302, openssl: 302, python: 302}
+num_rules: {bash: 20, glibc: 20, linux: 20, openssl: 20, python: 20}
+threshold: 0.125
+training_set: anthony-intersect-training

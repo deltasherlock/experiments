@@ -1,0 +1,156 @@
+amanda-server: {f1-score: 0.7723577235772359, false_negative: 56, false_positive: 0,
+  precision: 1.0, recall: 0.6291390728476821, true_positive: 95}
+arpwatch: {f1-score: 0.1715575620767494, false_negative: 113, false_positive: 254,
+  precision: 0.13013698630136986, recall: 0.25165562913907286, true_positive: 38}
+autotrace: {f1-score: 0.9899665551839464, false_negative: 3, false_positive: 0, precision: 1.0,
+  recall: 0.9801324503311258, true_positive: 148}
+bacula-client: {f1-score: 0.4105263157894737, false_negative: 112, false_positive: 0,
+  precision: 1.0, recall: 0.2582781456953642, true_positive: 39}
+bind9: {f1-score: 0.443298969072165, false_negative: 108, false_positive: 0, precision: 1.0,
+  recall: 0.2847682119205298, true_positive: 43}
+cdparanoia: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0,
+  recall: 1.0, true_positive: 151}
+chrony: {f1-score: 0.20560747663551404, false_negative: 107, false_positive: 233,
+  precision: 0.1588447653429603, recall: 0.2913907284768212, true_positive: 44}
+cobertura: {f1-score: 0.8473282442748091, false_negative: 40, false_positive: 0, precision: 1.0,
+  recall: 0.7350993377483444, true_positive: 111}
+crash: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+crda: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+cups: {f1-score: 0.06751054852320675, false_negative: 0, false_positive: 221, precision: 0.034934497816593885,
+  recall: 1.0, true_positive: 8}
+dcraw: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+docker: {f1-score: 0.9933333333333334, false_negative: 2, false_positive: 0, precision: 1.0,
+  recall: 0.9867549668874173, true_positive: 149}
+dovecot-core: {f1-score: 0.4824120603015075, false_negative: 103, false_positive: 0,
+  precision: 1.0, recall: 0.31788079470198677, true_positive: 48}
+dstat: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+dwz: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+emacs-nox: {f1-score: 0.9899665551839464, false_negative: 3, false_positive: 0, precision: 1.0,
+  recall: 0.9801324503311258, true_positive: 148}
+finger: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+freeradius: {f1-score: 0.23555555555555555, false_negative: 98, false_positive: 246,
+  precision: 0.17725752508361203, recall: 0.3509933774834437, true_positive: 53}
+gitweb: {f1-score: 0.29896907216494845, false_negative: 122, false_positive: 14, precision: 0.6744186046511628,
+  recall: 0.19205298013245034, true_positive: 29}
+gpm: {f1-score: 0.5887850467289719, false_negative: 88, false_positive: 0, precision: 1.0,
+  recall: 0.41721854304635764, true_positive: 63}
+iotop: {f1-score: 0.9933333333333334, false_negative: 2, false_positive: 0, precision: 1.0,
+  recall: 0.9867549668874173, true_positive: 149}
+iptraf-ng: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+ipvsadm: {f1-score: 0.188, false_negative: 104, false_positive: 302, precision: 0.1346704871060172,
+  recall: 0.31125827814569534, true_positive: 47}
+ksh: {f1-score: 0.8507042253521127, false_negative: 0, false_positive: 53, precision: 0.7401960784313726,
+  recall: 1.0, true_positive: 151}
+lftp: {f1-score: 0.9933333333333334, false_negative: 2, false_positive: 0, precision: 1.0,
+  recall: 0.9867549668874173, true_positive: 149}
+lm-sensors: {f1-score: 0.4591836734693878, false_negative: 106, false_positive: 0,
+  precision: 1.0, recall: 0.2980132450331126, true_positive: 45}
+logwatch: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+lshw: {f1-score: 0.9933333333333334, false_negative: 2, false_positive: 0, precision: 1.0,
+  recall: 0.9867549668874173, true_positive: 149}
+lynx: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+mailman: {f1-score: 0.34065934065934067, false_negative: 120, false_positive: 0, precision: 1.0,
+  recall: 0.2052980132450331, true_positive: 31}
+mariadb-server: {f1-score: 0.3763440860215053, false_negative: 116, false_positive: 0,
+  precision: 1.0, recall: 0.23178807947019867, true_positive: 35}
+marisa: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+mc: {f1-score: 0.6457399103139013, false_negative: 79, false_positive: 0, precision: 1.0,
+  recall: 0.4768211920529801, true_positive: 72}
+memcached: {f1-score: 0.3850267379679145, false_negative: 115, false_positive: 0,
+  precision: 1.0, recall: 0.23841059602649006, true_positive: 36}
+mgetty-voice: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0,
+  precision: 1.0, recall: 0.9933774834437086, true_positive: 150}
+mksh: {f1-score: 0.7773279352226721, false_negative: 55, false_positive: 0, precision: 1.0,
+  recall: 0.6357615894039735, true_positive: 96}
+mrtg: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+mstflint: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+mtr: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+mutt: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+nasm: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+nmap: {f1-score: 0.7936507936507936, false_negative: 1, false_positive: 77, precision: 0.6607929515418502,
+  recall: 0.9933774834437086, true_positive: 150}
+paps: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+pax: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+pesign: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+php: {f1-score: 0.4105263157894737, false_negative: 112, false_positive: 0, precision: 1.0,
+  recall: 0.2582781456953642, true_positive: 39}
+powertop: {f1-score: 0.9865771812080537, false_negative: 4, false_positive: 0, precision: 1.0,
+  recall: 0.9735099337748344, true_positive: 147}
+qemu-kvm: {f1-score: 0.3763440860215053, false_negative: 116, false_positive: 0, precision: 1.0,
+  recall: 0.23178807947019867, true_positive: 35}
+qrencode: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+quagga: {f1-score: 0.4512820512820513, false_negative: 107, false_positive: 0, precision: 1.0,
+  recall: 0.2913907284768212, true_positive: 44}
+quota: {f1-score: 0.4270833333333333, false_negative: 110, false_positive: 0, precision: 1.0,
+  recall: 0.271523178807947, true_positive: 41}
+rdist: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+rrdtool: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+samba: {f1-score: 0.37185929648241206, false_negative: 114, false_positive: 11, precision: 0.7708333333333334,
+  recall: 0.24503311258278146, true_positive: 37}
+sane: {f1-score: 0.8203125, false_negative: 46, false_positive: 0, precision: 1.0,
+  recall: 0.695364238410596, true_positive: 105}
+smartmontools: {f1-score: 0.4591836734693878, false_negative: 106, false_positive: 0,
+  precision: 1.0, recall: 0.2980132450331126, true_positive: 45}
+spamassassin: {f1-score: 0.4, false_negative: 6, false_positive: 0, precision: 1.0,
+  recall: 0.25, true_positive: 2}
+squid: {f1-score: 0.4105263157894737, false_negative: 112, false_positive: 0, precision: 1.0,
+  recall: 0.2582781456953642, true_positive: 39}
+subversion: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+supermin: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+sysstat: {f1-score: 0.17864923747276687, false_negative: 110, false_positive: 267,
+  precision: 0.1331168831168831, recall: 0.271523178807947, true_positive: 41}
+tcsh: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+telnetd: {f1-score: 0.7038626609442059, false_negative: 69, false_positive: 0, precision: 1.0,
+  recall: 0.543046357615894, true_positive: 82}
+tftpd-hpa: {f1-score: 0.029940119760479042, false_negative: 24, false_positive: 948,
+  precision: 0.01557632398753894, recall: 0.38461538461538464, true_positive: 15}
+tomcat7: {f1-score: 0.12946428571428573, false_negative: 122, false_positive: 268,
+  precision: 0.09764309764309764, recall: 0.19205298013245034, true_positive: 29}
+total: {f1-score: 0.7145547484530536, false_negative: 3183, false_positive: 3183,
+  precision: 0.7145547484530536, recall: 0.7145547484530536, true_positive: 7968}
+traceroute: {f1-score: 0.9899665551839464, false_negative: 3, false_positive: 0, precision: 1.0,
+  recall: 0.9801324503311258, true_positive: 148}
+transfig: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+tree: {f1-score: 0.9899665551839464, false_negative: 3, false_positive: 0, precision: 1.0,
+  recall: 0.9801324503311258, true_positive: 148}
+tshark: {f1-score: 0.832, false_negative: 21, false_positive: 0, precision: 1.0, recall: 0.7123287671232876,
+  true_positive: 52}
+unbound: {f1-score: 0.18930041152263374, false_negative: 105, false_positive: 289,
+  precision: 0.1373134328358209, recall: 0.304635761589404, true_positive: 46}
+units: {f1-score: 0.9966777408637874, false_negative: 1, false_positive: 0, precision: 1.0,
+  recall: 0.9933774834437086, true_positive: 150}
+virt-top: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}
+vsftpd: {f1-score: 0.4270833333333333, false_negative: 110, false_positive: 0, precision: 1.0,
+  recall: 0.271523178807947, true_positive: 41}
+watchdog: {f1-score: 0.4591836734693878, false_negative: 106, false_positive: 0, precision: 1.0,
+  recall: 0.2980132450331126, true_positive: 45}
+wget: {f1-score: 0.9899665551839464, false_negative: 3, false_positive: 0, precision: 1.0,
+  recall: 0.9801324503311258, true_positive: 148}
+zsh: {f1-score: 1.0, false_negative: 0, false_positive: 0, precision: 1.0, recall: 1.0,
+  true_positive: 151}

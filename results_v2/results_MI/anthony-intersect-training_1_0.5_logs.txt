@@ -1,0 +1,31 @@
+Identified nmap.100998.mi.ubx.ts.yaml as subversion where the rule has triplet: 644 /var/work/subversion/tests/libsvn_subr/dirent_uri-test.c unique to 1
+A rule broke on triplet: 644 /usr/local/share/nmap/scripts/broadcast-ping.nse unique to 1 filename: nmap.99779.mi.ubx.ts.yaml
+Identified p7zip.98336.mi.ubx.ts.yaml as lighttpd where the rule has triplet: 000 /var/work/src/lighttpd-http-header-glue.o unique to 1
+Identified p7zip.98340.mi.ubx.ts.yaml as lighttpd where the rule has triplet: 000 /var/work/src/lighttpd-http-header-glue.o unique to 1
+Identified p7zip.98401.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98457.mi.ubx.ts.yaml as lighttpd where the rule has triplet: 000 /var/work/src/lighttpd-http-header-glue.o unique to 1
+Identified p7zip.98477.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98491.mi.ubx.ts.yaml as lighttpd where the rule has triplet: 000 /var/work/src/lighttpd-http-header-glue.o unique to 1
+Identified p7zip.98506.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98517.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98524.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98532.mi.ubx.ts.yaml as lighttpd where the rule has triplet: 000 /var/work/src/lighttpd-http-header-glue.o unique to 1
+Identified p7zip.98537.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98728.mi.ubx.ts.yaml as wget where the rule has triplet: 644 /usr/local/share/locale/cs/LC_MESSAGES/wget.mo unique to 1
+Identified p7zip.98754.mi.ubx.ts.yaml as nmap where the rule has triplet: 644 /usr/local/share/nmap/scripts/broadcast-ping.nse unique to 1
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98398.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98402.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98423.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98431.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98454.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98464.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98469.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98478.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98480.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98485.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98492.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98497.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98502.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98510.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.98536.mi.ubx.ts.yaml
+A rule broke on triplet: 000 /var/work/oneprocess.o unique to 1 filename: vsftpd.99034.mi.ubx.ts.yaml

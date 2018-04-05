@@ -1,0 +1,8 @@
+avg_num_files: 151.0
+avg_num_rules: 10.0
+num_files: {bash1: 151, bash1.5: 151, glibc6.6: 151, glibc6.7: 151, linux44: 151,
+  linux45: 151, openssl2: 151, openssl4: 151, python2: 151, python3: 151}
+num_rules: {bash1: 2, bash1.5: 2, glibc6.6: 1, glibc6.7: 1, linux44: 20, linux45: 20,
+  openssl2: 7, openssl4: 7, python2: 20, python3: 20}
+threshold: 0.225
+training_set: anthony-intersect-training

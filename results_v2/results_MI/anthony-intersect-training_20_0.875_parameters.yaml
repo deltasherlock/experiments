@@ -1,0 +1,8 @@
+avg_num_files: 150.9
+avg_num_rules: 20.0
+num_files: {django: 150, lighttpd: 151, mosh: 151, nmap: 151, p7zip: 151, subversion: 151,
+  trac: 151, vsftpd: 151, wget: 151, wordpress: 151}
+num_rules: {django: 20, lighttpd: 20, mosh: 20, nmap: 20, p7zip: 20, subversion: 20,
+  trac: 20, vsftpd: 20, wget: 20, wordpress: 20}
+threshold: 0.875
+training_set: anthony-intersect-training

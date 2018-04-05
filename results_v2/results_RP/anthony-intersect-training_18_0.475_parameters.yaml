@@ -1,0 +1,29 @@
+avg_num_files: 144.8181818181818
+avg_num_rules: 18.285714285714285
+num_files: {amanda-server: 151, arpwatch: 151, autotrace: 151, bacula-client: 151,
+  bind9: 151, cdparanoia: 151, chrony: 151, cobertura: 151, crash: 151, crda: 151,
+  cups: 8, dcraw: 151, docker: 151, dovecot-core: 151, dstat: 151, dwz: 151, emacs-nox: 151,
+  finger: 151, freeradius: 151, gitweb: 151, gpm: 151, iotop: 151, iptraf-ng: 151,
+  ipvsadm: 151, ksh: 151, lftp: 151, lm-sensors: 151, logwatch: 151, lshw: 151, lynx: 151,
+  mailman: 151, mariadb-server: 151, marisa: 151, mc: 151, memcached: 151, mgetty-voice: 151,
+  mksh: 151, mrtg: 151, mstflint: 151, mtr: 151, mutt: 151, nasm: 151, nmap: 151,
+  paps: 151, pax: 151, pesign: 151, php: 151, powertop: 151, qemu-kvm: 151, qrencode: 151,
+  quagga: 151, quota: 151, rdist: 151, rrdtool: 151, samba: 151, sane: 151, smartmontools: 151,
+  spamassassin: 8, squid: 151, subversion: 151, supermin: 151, sysstat: 151, tcsh: 151,
+  telnetd: 151, tftpd-hpa: 39, tomcat7: 151, traceroute: 151, transfig: 151, tree: 151,
+  tshark: 73, unbound: 151, units: 151, virt-top: 151, vsftpd: 151, watchdog: 151,
+  wget: 151, zsh: 151}
+num_rules: {amanda-server: 20, arpwatch: 20, autotrace: 20, bacula-client: 9, bind9: 20,
+  cdparanoia: 16, chrony: 20, cobertura: 20, crash: 7, crda: 20, cups: 20, dcraw: 20,
+  docker: 17, dovecot-core: 20, dstat: 20, dwz: 11, emacs-nox: 7, finger: 13, freeradius: 20,
+  gitweb: 20, gpm: 20, iotop: 20, iptraf-ng: 20, ipvsadm: 20, ksh: 20, lftp: 20, lm-sensors: 20,
+  logwatch: 20, lshw: 11, lynx: 20, mailman: 20, mariadb-server: 7, marisa: 20, mc: 20,
+  memcached: 20, mgetty-voice: 20, mksh: 20, mrtg: 20, mstflint: 20, mtr: 20, mutt: 20,
+  nasm: 20, nmap: 20, paps: 13, pax: 20, pesign: 20, php: 7, powertop: 12, qemu-kvm: 20,
+  qrencode: 17, quagga: 20, quota: 20, rdist: 17, rrdtool: 20, samba: 20, sane: 20,
+  smartmontools: 20, spamassassin: 20, squid: 20, subversion: 20, supermin: 19, sysstat: 20,
+  tcsh: 20, telnetd: 20, tftpd-hpa: 20, tomcat7: 20, traceroute: 20, transfig: 20,
+  tree: 15, tshark: 15, unbound: 20, units: 20, virt-top: 15, vsftpd: 20, watchdog: 20,
+  wget: 20, zsh: 20}
+threshold: 0.475
+training_set: anthony-intersect-training
