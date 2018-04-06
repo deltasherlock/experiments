@@ -17,10 +17,11 @@ from random import randint
 
 def main():
     """ Generate rules from the corpus """
-    # The number of
+    # The number of apps to use for the training set
+    n_training_apps = int(sys.argv[1])
     # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
     #label_to_tokens = get_label_to_tokens(r'C:\Users\20176817\Documents\CloudArticle\vladimir\vladimir\apt\tuples')
-    anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False)
+    anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False, exclude_app='apache')
     label_to_tokens = transform_anthony_intersection(anthony_corpus)
     # Filter out labels given by yum that refer to i686 architecture
     label_to_tokens = {k: v for k, v in label_to_tokens.items() if k[-5:] != '.i686'}
@@ -45,7 +46,7 @@ def main():
     #del label_to_tokens
 
     # Read Anthony's data
-    anthony_data = read_anthony_data(r'/mnt/data/repository/testing/')
+    anthony_data = read_anthony_data(r'/mnt/data/repository/testing/', exclude_app='apache')
     # Filter out rules for labels that are not in Anthony's data
     rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
     # Check the rule on data. If nothing is printed it's good.
@@ -209,7 +210,7 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
 #
 # Test on Anthony's data
 #
-def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000):
+def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000, exclude_app=''):
     """
     Read in data provided by Anthony.
 
@@ -229,6 +230,8 @@ def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000):
         if union and 'union' not in filename: # By default only 'union' files are used
             continue
         if (not union) and 'union' in filename:
+            continue
+        if filename_label == exclude_app:
             continue
 
         with open(os.path.join(dirname, filename), encoding='utf8') as f:
