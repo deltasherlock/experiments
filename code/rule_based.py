@@ -12,10 +12,12 @@ import yaml
 import os
 import logging
 import random
+import sys
 from random import randint
 
 def main():
     """ Generate rules from the corpus """
+    # The number of
     # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
     #label_to_tokens = get_label_to_tokens(r'C:\Users\20176817\Documents\CloudArticle\vladimir\vladimir\apt\tuples')
     anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False)
