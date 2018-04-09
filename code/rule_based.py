@@ -17,10 +17,14 @@ from random import randint
 
 def main():
     """ Generate rules from the corpus """
+    logging.basicConfig(format='%(asctime)s %(levelname)-7s %(message)s',
+                        level=logging.DEBUG, filename=r'')
+    logging.getLogger().addHandler(logging.StreamHandler())
     # The number of apps to use for the training set
     n_training_apps = int(sys.argv[1])
     # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
     #label_to_tokens = get_label_to_tokens(r'C:\Users\20176817\Documents\CloudArticle\vladimir\vladimir\apt\tuples')
+    logging.info('Starting rule based method for %d application training set', n_training_apps)
     anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False, exclude_app='apache')
     label_to_tokens = transform_anthony_intersection(anthony_corpus)
     # Filter out labels given by yum that refer to i686 architecture
@@ -39,11 +43,7 @@ def main():
     label_to_token_groups = get_label_to_token_groups(token_to_labels)
     # Generate rules for all labels
     rules = get_rules(label_to_tokens, token_to_labels, label_to_token_groups, limit = 1)
-    # Free memory
-    #del duplicates
-    #del label_to_token_groups
-    #del token_to_labels
-    #del label_to_tokens
+    logging.info('Finished rule generation')
 
     # Read Anthony's data
     anthony_data = read_anthony_data(r'/mnt/data/repository/testing/', exclude_app='apache')
@@ -55,6 +55,7 @@ def main():
 
     #for thres in param_list:
     res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
+    logging.info('Finished rule checking')
 
     parameters['training_set'] = 'anthony-intersect-training'
     save_results(res_matrix, parameters, r'/mnt/data/results/repository',
@@ -127,7 +128,7 @@ def get_duplicates(label_to_tokens, token_to_labels, label_to_token_groups):
                 continue
             if label_to_tokens[label] == label_to_tokens[other_label]:
                 duplicates.add(other_label)
-                print('Duplicates: {0} = {1}'.format(label, other_label))
+                logging.info('Duplicates: {0} = {1}'.format(label, other_label))
     return duplicates
 
 
@@ -237,7 +238,7 @@ def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000, exclud
         with open(os.path.join(dirname, filename), encoding='utf8') as f:
             filedata = yaml.load(f)
         if 'label' not in filedata:
-            print(str(os.path.join(dirname, filename)) + " missed label !!!!")
+            logging.critical(str(os.path.join(dirname, filename)) + " missed label !!!!")
             continue
         label = filedata['label']
         label = ''.join([l for l in label if l.isalpha()])
@@ -295,7 +296,6 @@ def transform_anthony_data(data):
 
 def if_label(label_tested, label_rules, true_label, filename, changes, threshold):
     success = 0
-    global GLOBAL_LOG
     num_rules = len(label_rules)
     for rule in label_rules:
         correct_rule = True
@@ -304,16 +304,15 @@ def if_label(label_tested, label_rules, true_label, filename, changes, threshold
             inside = (triplet[1] != 'outside vs')
             if inside == (len([v for v in changes if token == v[-len(token):]]) == 0):
                 if label_tested == true_label:
-                    to_print = 'A rule broke on triplet: {0} {1} {2} filename: {3}'.format(triplet[0], triplet[1], triplet[2], filename)
-                    print(to_print)
-                    GLOBAL_LOG += to_print + '\n'
+                    logging.info('A rule broke on triplet: {0} {1} {2} filename: {3}'.format(
+                        triplet[0], triplet[1], triplet[2], filename))
                 correct_rule = False
                 break
         if correct_rule:
             if label_tested != true_label:
-                to_print = 'Identified {0} as {1} where the rule has triplet: {2} {3} {4}'.format(filename, label_tested, rule[0][0], rule[0][1], rule[0][2])
-                print(to_print)
-                GLOBAL_LOG += to_print + '\n'
+                logging.info(
+                    'Identified {0} as {1} where the rule has triplet: {2} {3} {4}'.format(
+                        filename, label_tested, rule[0][0], rule[0][1], rule[0][2]))
             success += 1
     return (success / num_rules) >= threshold
 
@@ -349,7 +348,7 @@ def check_rules_on_anthony_data(rules, anthony_data, threshold = 1):
             for label_tested in labels:
                 label_rules = rules[label_tested]
                 if len(label_rules) == 0:
-                    print('There are no rules for label {0}'.format(label_tested))
+                    logging.error('There are no rules for label {0}'.format(label_tested))
                     exit()
                 if if_label(label_tested, label_rules, true_label, filename, changes, threshold):
                     predicted_labels.append(label_tested)
@@ -371,19 +370,19 @@ def check_rules_on_anthony_data(rules, anthony_data, threshold = 1):
 
     for label in res_matrix:
         if (res_matrix[label]['true_positive'] + res_matrix[label]['false_positive']) == 0:
-            print(label + ' zero precision !!!')
+            logging.critical(label + ' zero precision !!!')
             res_matrix[label]['precision'] = 0
         else:
             res_matrix[label]['precision'] = res_matrix[label]['true_positive'] \
         / (res_matrix[label]['true_positive'] + res_matrix[label]['false_positive'])
         if (res_matrix[label]['true_positive'] + res_matrix[label]['false_negative']) == 0:
-            print(label + ' zero recall !!!')
+            logging.critical(label + ' zero recall !!!')
             res_matrix[label]['recall'] = 0
         else:
             res_matrix[label]['recall'] = res_matrix[label]['true_positive'] \
         / (res_matrix[label]['true_positive'] + res_matrix[label]['false_negative'])
         if res_matrix[label]['precision'] + res_matrix[label]['recall'] == 0:
-            print(label + ' zero f1-score !!!')
+            logging.critical(label + ' zero f1-score !!!')
             res_matrix[label]['f1-score'] = 0
         else:
             res_matrix[label]['f1-score'] = 2 * res_matrix[label]['precision'] \
@@ -399,10 +398,6 @@ def save_results(res_matrix, parameters, dirname, filename):
         yaml.dump(res_matrix, f)
     with open(os.path.join(dirname, filename + "_parameters.yaml"), encoding='utf8', mode ='w') as f:
         yaml.dump(parameters, f)
-    with open(os.path.join(dirname, filename + "_logs.txt"), encoding='utf8', mode ='w') as f:
-        global GLOBAL_LOG
-        f.write(GLOBAL_LOG)
-        GLOBAL_LOG = ''
 
 if __name__ == '__main__':
     main()
