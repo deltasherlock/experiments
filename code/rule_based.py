@@ -19,12 +19,6 @@ def main():
     """ Generate rules from the corpus """
     logging.basicConfig(
         format='%(asctime)s %(levelname)-7s %(message)s', level=logging.DEBUG,
-        filename=os.path.join(
-            r'/mnt/data/results/repository', '_'.join(
-                [parameters['training_set'], str(round(parameters['avg_num_rules'])),
-                 str(parameters['threshold']), 'logs.txt']
-            )
-        )
     )
     logging.getLogger().addHandler(logging.StreamHandler())
     # The number of apps to use for the training set
