@@ -16,7 +16,7 @@ import sys
 from random import randint
 
 def main():
-    """ Generate rules from the corpus """
+    """ Generate rules from the corpus, tests on test set """
     logformat = '%(asctime)s %(levelname)-7s %(message)s'
     logging.basicConfig(
         format=logformat, level=logging.DEBUG,
@@ -26,13 +26,34 @@ def main():
     streamer.setFormatter(logging.Formatter(logformat))
     logging.getLogger().addHandler(streamer)
 
-    # The number of apps to use for the training set
-    n_training_apps = int(sys.argv[1])
     # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
-    #label_to_tokens = get_label_to_tokens(r'C:\Users\20176817\Documents\CloudArticle\vladimir\vladimir\apt\tuples')
-    logging.info('Starting rule based method for %d application training set', n_training_apps)
+
     anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False, exclude_app='apache')
-    label_to_tokens = transform_anthony_intersection(anthony_corpus)
+    anthony_data = read_anthony_data(r'/mnt/data/repository/testing/', exclude_app='apache')
+
+    for training_set_size in range(len(anthony_corpus.keys())):
+        if training_set_size % 10 != 0:
+            continue
+        logging.info('Starting rule based method for %d application training set', training_set_size)
+        rules = generate_rules(anthony_corpus)
+
+        # Filter out rules for labels that are not in Anthony's data
+        rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
+        # Check the rule on data. If nothing is printed it's good.
+        param_list = [0.025, 0.075, 0.125, 0.175, 0.225, 0.275, 0.325, 0.375, 0.425, 0.475, 0.575, \
+                      0.675, 0.775, 0.875, 0.975]
+
+        #for thres in param_list:
+        res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
+        logging.info('Finished rule checking')
+
+        parameters['training_set'] = 'anthony-intersect-training'
+        save_results(res_matrix, parameters, r'/mnt/data/results/repository',
+                     filename = parameters['training_set'] + '_' + str(round(parameters['avg_num_rules']))  + '_' + str(parameters['threshold']))
+
+def generate_rules(corpus):
+    """Generates rules from the given corpus"""
+    label_to_tokens = transform_anthony_intersection(corpus)
     # Filter out labels given by yum that refer to i686 architecture
     label_to_tokens = {k: v for k, v in label_to_tokens.items() if k[-5:] != '.i686'}
     # Get the inverse map
@@ -50,22 +71,7 @@ def main():
     # Generate rules for all labels
     rules = get_rules(label_to_tokens, token_to_labels, label_to_token_groups, limit = 1)
     logging.info('Finished rule generation')
-
-    # Read Anthony's data
-    anthony_data = read_anthony_data(r'/mnt/data/repository/testing/', exclude_app='apache')
-    # Filter out rules for labels that are not in Anthony's data
-    rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
-    # Check the rule on data. If nothing is printed it's good.
-    param_list = [0.025, 0.075, 0.125, 0.175, 0.225, 0.275, 0.325, 0.375, 0.425, 0.475, 0.575, \
-                  0.675, 0.775, 0.875, 0.975]
-
-    #for thres in param_list:
-    res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
-    logging.info('Finished rule checking')
-
-    parameters['training_set'] = 'anthony-intersect-training'
-    save_results(res_matrix, parameters, r'/mnt/data/results/repository',
-                 filename = parameters['training_set'] + '_' + str(round(parameters['avg_num_rules']))  + '_' + str(parameters['threshold']))
+    return rules
 
 def get_label_to_tokens(filename):
     """
@@ -223,10 +229,11 @@ def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000, exclud
 
     By default only 'union' files are used!!!
     """
+    logging.info("Reading anthony_data from %s", dirname)
     counter = dict()
     anthony_data = dict()
     filenames = os.listdir(dirname)
-    for filename in filenames:
+    for filename in tqdm(filenames):
         filename_label = filename.split('.')[0]
         if (filename_label in counter) and (counter[filename_label] > threshold):
             continue
