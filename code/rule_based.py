@@ -17,10 +17,15 @@ from random import randint
 
 def main():
     """ Generate rules from the corpus """
+    logformat = '%(asctime)s %(levelname)-7s %(message)s'
     logging.basicConfig(
-        format='%(asctime)s %(levelname)-7s %(message)s', level=logging.DEBUG,
+        format=logformat, level=logging.DEBUG,
+        filename='/mnt/data/results/repository/newest_logs.txt', filemode='w',
     )
-    logging.getLogger().addHandler(logging.StreamHandler())
+    streamer = logging.StreamHandler()
+    streamer.setFormatter(logging.Formatter(logformat))
+    logging.getLogger().addHandler(streamer)
+
     # The number of apps to use for the training set
     n_training_apps = int(sys.argv[1])
     # Get label to tokens corpus from a file (apt or yum / paths or tuples or names)
@@ -233,13 +238,13 @@ def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000, exclud
             continue
         if (not union) and 'union' in filename:
             continue
-        if filename_label == exclude_app:
+        if exclude_app in filename:
             continue
 
         with open(os.path.join(dirname, filename), encoding='utf8') as f:
             filedata = yaml.load(f)
         if 'label' not in filedata:
-            logging.critical(str(os.path.join(dirname, filename)) + " missed label !!!!")
+            logging.warning(str(os.path.join(dirname, filename)) + " missed label !!!!")
             continue
         label = filedata['label']
         label = ''.join([l for l in label if l.isalpha()])
@@ -371,19 +376,19 @@ def check_rules_on_anthony_data(rules, anthony_data, threshold = 1):
 
     for label in res_matrix:
         if (res_matrix[label]['true_positive'] + res_matrix[label]['false_positive']) == 0:
-            logging.critical(label + ' zero precision !!!')
+            logging.warning(label + ' zero precision !!!')
             res_matrix[label]['precision'] = 0
         else:
             res_matrix[label]['precision'] = res_matrix[label]['true_positive'] \
         / (res_matrix[label]['true_positive'] + res_matrix[label]['false_positive'])
         if (res_matrix[label]['true_positive'] + res_matrix[label]['false_negative']) == 0:
-            logging.critical(label + ' zero recall !!!')
+            logging.warning(label + ' zero recall !!!')
             res_matrix[label]['recall'] = 0
         else:
             res_matrix[label]['recall'] = res_matrix[label]['true_positive'] \
         / (res_matrix[label]['true_positive'] + res_matrix[label]['false_negative'])
         if res_matrix[label]['precision'] + res_matrix[label]['recall'] == 0:
-            logging.critical(label + ' zero f1-score !!!')
+            logging.warning(label + ' zero f1-score !!!')
             res_matrix[label]['f1-score'] = 0
         else:
             res_matrix[label]['f1-score'] = 2 * res_matrix[label]['precision'] \
