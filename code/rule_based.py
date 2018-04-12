@@ -42,7 +42,7 @@ def main():
         for i in range(5):
             training_set = random.sample(applications, training_set_size)
             rules = generate_rules(
-                {app: files for app, files in anthony_corpus.iteritems() if app in training_set}
+                {app: files for app, files in anthony_corpus.items() if app in training_set}
             )
 
             # Filter out rules for labels that are not in Anthony's data
