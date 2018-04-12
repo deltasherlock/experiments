@@ -13,7 +13,9 @@ import os
 import logging
 import random
 import sys
-from random import randint
+from random import randint, sample
+
+from tqdm import tqdm
 
 def main():
     """ Generate rules from the corpus, tests on test set """
@@ -30,26 +32,29 @@ def main():
 
     anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/', union = False, exclude_app='apache')
     anthony_data = read_anthony_data(r'/mnt/data/repository/testing/', exclude_app='apache')
+    applications = anthony_corpus.keys()
 
-    for training_set_size in range(len(anthony_corpus.keys())):
+    counter = 0
+    for training_set_size, _ in enumerate(applications):
         if training_set_size % 10 != 0:
             continue
         logging.info('Starting rule based method for %d application training set', training_set_size)
-        rules = generate_rules(anthony_corpus)
+        for i in range(5):
+            training_set = random.sample(applications, training_set_size)
+            rules = generate_rules(
+                {app: files for app, files in anthony_corpus.iteritems() if app in training_set}
+            )
 
-        # Filter out rules for labels that are not in Anthony's data
-        rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
-        # Check the rule on data. If nothing is printed it's good.
-        param_list = [0.025, 0.075, 0.125, 0.175, 0.225, 0.275, 0.325, 0.375, 0.425, 0.475, 0.575, \
-                      0.675, 0.775, 0.875, 0.975]
+            # Filter out rules for labels that are not in Anthony's data
+            rules = {k: v for k, v in rules.items() if k in anthony_data.keys()}
 
-        #for thres in param_list:
-        res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
-        logging.info('Finished rule checking')
+            res_matrix, parameters = check_rules_on_anthony_data(rules, anthony_data, threshold = 0.5)
+            parameters['training_apps'] = training_set
 
-        parameters['training_set'] = 'anthony-intersect-training'
-        save_results(res_matrix, parameters, r'/mnt/data/results/repository',
-                     filename = parameters['training_set'] + '_' + str(round(parameters['avg_num_rules']))  + '_' + str(parameters['threshold']))
+            counter += 1
+            parameters['training_set_name'] = 'training-set-varying-%d' % counter
+            save_results(res_matrix, parameters, r'/mnt/data/results/repository',
+                         filename = parameters['training_set_name'] + '_' + str(round(parameters['avg_num_rules']))  + '_' + str(parameters['threshold']))
 
 def generate_rules(corpus):
     """Generates rules from the given corpus"""
@@ -228,6 +233,13 @@ def read_anthony_data(dirname, union = False, rate = 1, threshold = 1000, exclud
     Read in data provided by Anthony.
 
     By default only 'union' files are used!!!
+
+    Returns
+    -------
+    anthony_data : dict[str, dict[str, set[str]]]
+        first dict contains a list of each label,
+        second dict contains each yaml file parsed belonging to the label
+        the set of strings contains the '$permissions $filename' strings
     """
     logging.info("Reading anthony_data from %s", dirname)
     counter = dict()
@@ -402,6 +414,7 @@ def check_rules_on_anthony_data(rules, anthony_data, threshold = 1):
         * res_matrix[label]['recall'] \
         / (res_matrix[label]['precision'] + res_matrix[label]['recall'])
 
+    logging.info('Finished rule checking')
     return (res_matrix, parameters)
 
 def save_results(res_matrix, parameters, dirname, filename):
