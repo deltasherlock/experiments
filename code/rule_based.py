@@ -7,31 +7,34 @@ Modified by Emre Ates after 04/05/18
 Copyright © 2017 Vladimir Pchelin. All rights reserved.
 """
 
-import yaml
 import os
 import logging
+from pathlib import Path
 import random
 from random import randint
 # from random import sample
 import pdb
 
+import yaml
 from tqdm import tqdm
 
+DATA_DIR = Path('/projectnb/peaclab-mon/deltasherlock/repository/')
+OUTPUT_DIR = Path('/projectnb/peaclab-mon/deltasherlock/results/')
 
 def main():
     """ Generate rules from the corpus, tests on test set """
     logformat = '%(asctime)s %(levelname)-7s %(message)s'
     logging.basicConfig(
         format=logformat, level=logging.DEBUG,
-        filename='/mnt/data/results/repository/newest_logs.txt', filemode='w',
+        filename=OUTPUT_DIR / 'newest_logs.txt', filemode='w',
     )
     streamer = logging.StreamHandler()
     streamer.setFormatter(logging.Formatter(logformat))
     logging.getLogger().addHandler(streamer)
 
-    anthony_corpus = read_anthony_data(r'/mnt/data/repository/training/',
+    anthony_corpus = read_anthony_data(DATA_DIR / 'training/',
                                        union=False, exclude_app='apache')
-    anthony_data = read_anthony_data(r'/mnt/data/repository/testing/',
+    anthony_data = read_anthony_data(DATA_DIR / 'testing/',
                                      exclude_app='apache')
     applications = anthony_corpus.keys()
 
@@ -41,7 +44,7 @@ def main():
             continue
         logging.info('Starting rule based method for %d application training '
                      'set', training_set_size)
-        for i in range(5):
+        for _ in range(5):
             training_set = random.sample(applications, training_set_size)
             rules = generate_rules(
                 {app: files for app, files in anthony_corpus.items()
