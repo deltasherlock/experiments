@@ -186,9 +186,6 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
     requirement given above.
     """
     assert (label in label_to_token_groups)
-    if label == 'subversion':
-        import pdb
-        pdb.set_trace()
     rules = []
     used_tokens = set()
     for index in sorted(label_to_token_groups[label].keys()):
