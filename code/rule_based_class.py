@@ -10,9 +10,7 @@ class RuleBased:
         self.threshold = threshold
 
     def fit(self, X, y, csids=None):
-        label_to_tokens = self._transform_anthony_intersection(
-            {app: files for app, files in zip(y, X)}
-        )
+        label_to_tokens = self._transform_anthony_intersection(X, y)
         # Filter out labels given by yum that refer to i686 architecture
         label_to_tokens = {k: v for k, v in label_to_tokens.items()
                            if k[-5:] != '.i686'}
@@ -44,6 +42,9 @@ class RuleBased:
             for label_tested, label_rules in self.rules.items():
                 n_rules_satisfied = 0
                 n_rules = len(label_rules)
+                if n_rules == 0:
+                    logging.info("%s has no rules", label_tested)
+                    continue
                 for rule in label_rules:
                     rule_satisfied = True
                     for triplet in rule:
@@ -57,13 +58,16 @@ class RuleBased:
                         n_rules_satisfied += 1
                 if (n_rules_satisfied / n_rules) >= self.threshold:
                     predictions.append(label_tested)
+                    break
+            else:  # No rule was satisfied
+                predictions.append('???')
         logging.info('Finished rule checking')
         return predictions
 
-    def _transform_anthony_intersection(self, data):
+    def _transform_anthony_intersection(self, changesets, labels):
         res = dict()
-        for label in data:
-            for token in data[label]:
+        for data, label in zip(changesets, labels):
+            for token in data:
                 if label not in res:
                     res[label] = dict()
                 if token not in res[label]:
@@ -180,6 +184,9 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
     requirement given above.
     """
     assert (label in label_to_token_groups)
+    if label == 'subversion':
+        import pdb
+        pdb.set_trace()
     rules = []
     used_tokens = set()
     for index in sorted(label_to_token_groups[label].keys()):
