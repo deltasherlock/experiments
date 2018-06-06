@@ -6,8 +6,9 @@ import logging
 
 class RuleBased:
     """ scikit-style wrapper """
-    def __init__(self, threshold=0.5):
+    def __init__(self, threshold=0.5, max_index=20):
         self.threshold = threshold
+        self.max_index = max_index
 
     def fit(self, X, y, csids=None):
         label_to_tokens = self._transform_anthony_intersection(X, y)
@@ -30,7 +31,8 @@ class RuleBased:
         label_to_token_groups = get_label_to_token_groups(token_to_labels)
         # Generate rules for all labels
         rules = get_rules(label_to_tokens, token_to_labels,
-                          label_to_token_groups, limit=1)
+                          label_to_token_groups, limit=1,
+                          max_index=self.max_index)
 
         # Filter out rules for labels that are not in Anthony's data
         self.rules = {k: v for k, v in rules.items() if k in y}
