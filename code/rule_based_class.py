@@ -6,9 +6,10 @@ import logging
 
 class RuleBased:
     """ scikit-style wrapper """
-    def __init__(self, threshold=0.5, max_index=20):
+    def __init__(self, threshold=0.5, max_index=20, string_rules=False):
         self.threshold = threshold
         self.max_index = max_index
+        self.string_rules = string_rules
 
     def fit(self, X, y, csids=None):
         label_to_tokens = self._transform_anthony_intersection(X, y)
@@ -32,7 +33,8 @@ class RuleBased:
         # Generate rules for all labels
         rules = get_rules(label_to_tokens, token_to_labels,
                           label_to_token_groups, limit=1,
-                          max_index=self.max_index)
+                          max_index=self.max_index,
+                          string_rules=self.string_rules)
 
         # Filter out rules for labels that are not in Anthony's data
         self.rules = {k: v for k, v in rules.items() if k in y}
@@ -158,7 +160,8 @@ def get_duplicates(label_to_tokens, token_to_labels, label_to_token_groups):
 
 
 def get_rules_per_label(label, label_to_tokens, token_to_labels,
-                        label_to_token_groups, limit=1, max_index=0):
+                        label_to_token_groups, limit=1, max_index=0,
+                        string_rules=False):
     """
     Generates rules, at most <limit>, for a specified <label>.
 
@@ -195,7 +198,10 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
             if token in used_tokens:
                 continue
             rule = []
-            rule.append((token, 'unique to', str(index)))
+            if string_rules:
+                rule.append(token + ' unique to ' + str(index))
+            else:
+                rule.append((token, 'unique to', str(index)))
             for other_label in token_to_labels[token]:
                 if other_label == label:
                     continue
@@ -207,11 +213,19 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
                 plus_diff -= used_tokens
                 minus_diff -= used_tokens
                 if len(plus_diff) > 0:
-                    rule.append(
-                        (list(plus_diff)[0], 'inside vs', other_label))
+                    if string_rules:
+                        rule.append(
+                            list(plus_diff)[0] + ' inside vs ' + other_label)
+                    else:
+                        rule.append(
+                            (list(plus_diff)[0], 'inside vs', other_label))
                 elif len(minus_diff) > 0:
-                    rule.append(
-                        (list(minus_diff)[0], 'outside vs', other_label))
+                    if string_rules:
+                        rule.append(
+                            list(minus_diff)[0] + ' outside vs ' + other_label)
+                    else:
+                        rule.append(
+                            (list(minus_diff)[0], 'outside vs', other_label))
                 else:
                     break
             if len(rule) < index:
@@ -225,7 +239,7 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
 
 
 def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
-              limit=1, max_index=5):
+              limit=1, max_index=5, string_rules=False):
     """
     Generates a dictionary from labels to sets of rules.
 
@@ -235,5 +249,5 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
     for label in label_to_token_groups:
         rules[label] = get_rules_per_label(
             label, label_to_tokens, token_to_labels,
-            label_to_token_groups, limit, max_index)
+            label_to_token_groups, limit, max_index, string_rules)
     return rules
