@@ -9,19 +9,17 @@ from rule_based_class import RuleBased
 def main():
     labels = []
     changesets = []
-    counter = 20
     for changeset in Path(
             '/home/ates/deltasherlock/centos-files').glob('*.changes'):
         with changeset.open() as f:
             changesets.append([x.strip() for x in f])
         labels.append(changeset.stem)
-        if counter < 0:
-            break
-        else:
-            counter -= 1
     clf = RuleBased(string_rules=True)
+    print(len(changesets), len(labels))
     clf.fit(changesets, labels)
-    pprint(clf.rules)
+    print(len(clf.rules))
+    # for label, rules in clf.rules.items():
+    #     pprint((label, rules), width=200, compact=True)
 
 
 if __name__ == '__main__':
