@@ -1,4 +1,16 @@
 For YUM:
+Used versions:
+
+
+[centos@centos-rule-test ~]$ cat /etc/redhat-release
+CentOS Linux release 7.5.1804 (Core)
+[centos@centos-rule-test ~]$ uname -a
+Linux centos-rule-test.moclocal 3.10.0-862.3.2.el7.x86_64 #1 SMP Mon May 21 23:36:36 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+
 $ TERM= unbuffer yum list all > all_packages.txt
 Then go in and remove info lines - beginning and one line in the middle
 $ awk '{print $1}' all_packages.txt | sort | uniq > package_names.txt
+There should be 10137 packages.
+
+
