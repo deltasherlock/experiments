@@ -1,7 +1,5 @@
 For YUM:
 Used versions:
-
-
 [centos@centos-rule-test ~]$ cat /etc/redhat-release
 CentOS Linux release 7.5.1804 (Core)
 [centos@centos-rule-test ~]$ uname -a
@@ -17,3 +15,20 @@ This takes a while:
 $ mkdir files
 $ while IFS='' read -r line || [[ -n "$line" ]]; do echo $line; repoquery -l $line > files/${line}.changes; done < package_names.txt
 
+For APT:
+Used versions:
+ubuntu@ubuntu-rule-test:~$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.1 LTS"
+ubuntu@ubuntu-rule-test:~$ uname -a
+Linux ubuntu-rule-test 4.15.0-33-generic #36-Ubuntu SMP Wed Aug 15 16:00:05 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+
+
+$ sudo apt-cache search '.*' > all_packages.txt
+$ awk '{print $1}' all_packages.txt | sort | uniq > package_names.txt
+There are 61241 packages.
+
+$ mkdir files
+$ while IFS='' read -r line || [[ -n "$line" ]]; do echo $line; apt-file list $line | sed "s/${line}: //" > files/${line}.changes; done < package_names.txt
