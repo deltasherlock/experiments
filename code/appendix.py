@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import logging
 from pathlib import Path
 from pprint import pprint
 
@@ -7,6 +8,7 @@ from rule_based_class import RuleBased
 
 
 def main():
+    logging.basicConfig(level=logging.DEBUG)
     labels = []
     changesets = []
     for changeset in Path(
@@ -18,8 +20,8 @@ def main():
     print(len(changesets), len(labels))
     clf.fit(changesets, labels)
     print(len(clf.rules))
-    # for label, rules in clf.rules.items():
-    #     pprint((label, rules), width=200, compact=True)
+    for label, rules in clf.rules.items():
+        pprint((label, rules), width=200, compact=True)
 
 
 if __name__ == '__main__':

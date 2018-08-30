@@ -13,9 +13,9 @@ class RuleBased:
 
     def fit(self, X, y, csids=None):
         label_to_tokens = self._transform_anthony_intersection(X, y)
-        # Filter out labels given by yum that refer to i686 architecture
-        label_to_tokens = {k: v for k, v in label_to_tokens.items()
-                           if k[-5:] != '.i686'}
+        # # Filter out labels given by yum that refer to i686 architecture
+        # label_to_tokens = {k: v for k, v in label_to_tokens.items()
+        #                    if k[-5:] != '.i686'}
         # Get the inverse map
         token_to_labels = get_token_to_labels(label_to_tokens)
         # Get the map from labels to categorized tokens
@@ -246,6 +246,7 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
     See description of <get_rules_per_label> for more details.
     """
     rules = dict()
+    print(len(label_to_token_groups))
     for label in label_to_token_groups:
         rules[label] = get_rules_per_label(
             label, label_to_tokens, token_to_labels,

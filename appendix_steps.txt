@@ -25,6 +25,10 @@ $ cat files/* > all_files.txt
 $ sort all_files.txt | uniq | wc -l
 1,191,535 unique files
 
+Use appendix.py in code.
+There are 55 packages that are complete duplicates (usually .i686 and .x86_64)
+
+
 For APT:
 Used versions:
 ubuntu@ubuntu-rule-test:~$ cat /etc/lsb-release
