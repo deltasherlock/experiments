@@ -17,6 +17,14 @@ This takes a while:
 $ mkdir files
 $ while IFS='' read -r line || [[ -n "$line" ]]; do echo $line; repoquery -l $line > files/${line}.changes; done < package_names.txt
 
+$ wc -l files/* | grep -v ' 0 ' | wc -l
+10069 non-empty packages
+
+$ cat files/* > all_files.txt
+1,340,659 files
+$ sort all_files.txt | uniq | wc -l
+1,191,535 unique files
+
 For APT:
 Used versions:
 ubuntu@ubuntu-rule-test:~$ cat /etc/lsb-release
@@ -32,5 +40,6 @@ $ sudo apt-cache search '.*' > all_packages.txt
 $ awk '{print $1}' all_packages.txt | sort | uniq > package_names.txt
 There are 61241 packages.
 
+This takes very long for ubuntu:
 $ mkdir files
 $ while IFS='' read -r line || [[ -n "$line" ]]; do echo $line; apt-file list $line | sed "s/${line}: //" > files/${line}.changes; done < package_names.txt
