@@ -1,3 +1,5 @@
+Retrieved lists at Thu Aug 30 12:28:25 UTC 2018
+
 For YUM:
 Used versions:
 [centos@centos-rule-test ~]$ cat /etc/redhat-release
