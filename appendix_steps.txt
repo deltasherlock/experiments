@@ -1,0 +1,4 @@
+For YUM:
+$ TERM= unbuffer yum list all > all_packages.txt
+Then go in and remove info lines - beginning and one line in the middle
+$ awk '{print $1}' all_packages.txt | sort | uniq > package_names.txt

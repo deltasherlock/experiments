@@ -1,8 +1,8 @@
 method,dirty_count,precision,recall
-Our Method,0,0.950,0.947
-Our Method,1000,0.980,0.979
-Our Method,2000,0.982,0.982
-Our Method,3000,0.983,0.983
+Praxi,0,0.950,0.947
+Praxi,1000,0.980,0.979
+Praxi,2000,0.982,0.982
+Praxi,3000,0.983,0.983
 DeltaSherlock,0,1.0,1.0
 DeltaSherlock,1000,1.0,1.0
 DeltaSherlock,2000,1.0,1.0

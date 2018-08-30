@@ -4,11 +4,11 @@ DeltaSherlock,2500,0.899,0.888
 DeltaSherlock,5000,0.903,0.893
 DeltaSherlock,7500,0.914,0.895
 DeltaSherlock,10000,0.908,0.898
-Our Method,0,0.991,0.992
-Our Method,2500,0.997,0.997
-Our Method,5000,0.996,0.996
-Our Method,7500,0.998,0.998
-Our Method,10000,0.998,0.998
+Praxi,0,0.991,0.992
+Praxi,2500,0.997,0.997
+Praxi,5000,0.996,0.996
+Praxi,7500,0.998,0.998
+Praxi,10000,0.998,0.998
 Rule Based,0,0.923,0.84
 Rule Based,2500,0.979,0.861
 Rule Based,5000,0.982,0.859
