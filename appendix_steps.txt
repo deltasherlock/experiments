@@ -47,3 +47,14 @@ There are 61241 packages.
 This takes very long for ubuntu:
 $ mkdir files
 $ while IFS='' read -r line || [[ -n "$line" ]]; do echo $line; apt-file list $line | sed "s/${line}: //" > files/${line}.changes; done < package_names.txt
+
+$ for i in files/*; do wc -l $i; done | grep -v '^0' | wc -l
+61225 non-empty packages
+
+$ for i in files/*; do cat $i >> all_files.txt; done
+7,701,647 files
+$ sort all_files.txt | uniq | wc -l
+7,654,404 unique files
+
+Use appendix.py in code.
+There are ??? packages that are complete duplicates (usually .i686 and .x86_64)
