@@ -12,7 +12,7 @@ def main():
     labels = []
     changesets = []
     for changeset in Path(
-            '/home/ates/deltasherlock/centos-files').glob('*.changes'):
+            '/home/ates/deltasherlock/ubuntu-files').glob('*.changes'):
         with changeset.open() as f:
             changesets.append([x.strip() for x in f])
         labels.append(changeset.stem)
