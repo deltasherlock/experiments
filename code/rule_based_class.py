@@ -70,7 +70,8 @@ class RuleBased:
                 cur_predictions[label_tested] = n_rules_satisfied / n_rules
             result = []
             for _ in range(n_preds):
-                if max(cur_predictions.values()) == 0 or (
+                if (not cur_predictions) or (
+                        max(cur_predictions.values()) == 0) or (
                         max(cur_predictions.values()) < self.threshold and
                         n_preds == 1):
                     predictions.append('???')
@@ -278,7 +279,6 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
     See description of <get_rules_per_label> for more details.
     """
     rules = dict()
-    print(len(label_to_token_groups))
     for label in label_to_token_groups:
         rules[label] = get_rules_per_label(
             label, label_to_tokens, token_to_labels,
