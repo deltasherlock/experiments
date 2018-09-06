@@ -6,10 +6,12 @@ import logging
 
 class RuleBased:
     """ scikit-style wrapper """
-    def __init__(self, threshold=0.5, max_index=20, string_rules=False):
+    def __init__(self, threshold=0.5, max_index=20, string_rules=False,
+                 unknown_label='???'):
         self.threshold = threshold
         self.max_index = max_index
         self.string_rules = string_rules
+        self.unknown_label = unknown_label
 
     def fit(self, X, y, csids=None):
         X, y = self._filter_multilabels(X, y)
@@ -74,7 +76,7 @@ class RuleBased:
                         max(cur_predictions.values()) == 0) or (
                         max(cur_predictions.values()) < self.threshold and
                         n_preds == 1):
-                    predictions.append('???')
+                    result.append(self.unknown_label)
                 else:
                     best_pred = max(cur_predictions, key=cur_predictions.get)
                     result.append(best_pred)
@@ -88,6 +90,10 @@ class RuleBased:
 
     def top_k_tags(self, X, ntags):
         return self.predict(X, ntags=ntags)
+
+    def get_args(self):
+        return 'threshold: {}, max_index: {}'.format(
+            self.threshold, self.max_index)
 
     def _filter_multilabels(self, X, y):
         new_X = []
