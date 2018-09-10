@@ -3,6 +3,10 @@ Praxi,0,0.950,0.947
 Praxi,1000,0.980,0.979
 Praxi,2000,0.982,0.982
 Praxi,3000,0.983,0.983
+Rule Based,0,0.0,0.0
+Rule Based,1000,0.950,0.589
+Rule Based,2000,0.941,0.744
+Rule Based,3000,0.942,0.803
 DeltaSherlock,0,1.0,1.0
 DeltaSherlock,1000,1.0,1.0
 DeltaSherlock,2000,1.0,1.0
