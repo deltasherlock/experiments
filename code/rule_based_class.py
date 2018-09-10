@@ -6,12 +6,15 @@ import logging
 
 class RuleBased:
     """ scikit-style wrapper """
-    def __init__(self, threshold=0.5, max_index=20, string_rules=False):
+    def __init__(self, threshold=0.5, max_index=20, string_rules=False,
+                 unknown_label='???'):
         self.threshold = threshold
         self.max_index = max_index
         self.string_rules = string_rules
+        self.unknown_label = unknown_label
 
     def fit(self, X, y, csids=None):
+        X, y = self._filter_multilabels(X, y)
         label_to_tokens = self._transform_anthony_intersection(X, y)
         # # Filter out labels given by yum that refer to i686 architecture
         # label_to_tokens = {k: v for k, v in label_to_tokens.items()
@@ -40,9 +43,15 @@ class RuleBased:
         self.rules = {k: v for k, v in rules.items() if k in y}
         logging.info('Finished rule generation')
 
-    def predict(self, X, csids=None):
+    def predict(self, X, csids=None, ntags=None):
+        if ntags is None:
+            unravel_result = True
+            ntags = [1 for _ in len(X)]
+        else:
+            unravel_result = False
         predictions = []
-        for changes in X:
+        for n_preds, changes in zip(ntags, X):
+            cur_predictions = {}
             for label_tested, label_rules in self.rules.items():
                 n_rules_satisfied = 0
                 n_rules = len(label_rules)
@@ -60,13 +69,43 @@ class RuleBased:
                             break
                     if rule_satisfied:
                         n_rules_satisfied += 1
-                if (n_rules_satisfied / n_rules) >= self.threshold:
-                    predictions.append(label_tested)
-                    break
-            else:  # No rule was satisfied
-                predictions.append('???')
+                cur_predictions[label_tested] = n_rules_satisfied / n_rules
+            result = []
+            for _ in range(n_preds):
+                if (not cur_predictions) or (
+                        max(cur_predictions.values()) == 0) or (
+                        max(cur_predictions.values()) < self.threshold and
+                        n_preds == 1):
+                    result.append(self.unknown_label)
+                else:
+                    best_pred = max(cur_predictions, key=cur_predictions.get)
+                    result.append(best_pred)
+                    del cur_predictions[best_pred]
+            if unravel_result:
+                predictions.append(result[0])
+            else:
+                predictions.append(result)
         logging.info('Finished rule checking')
         return predictions
+
+    def top_k_tags(self, X, ntags):
+        return self.predict(X, ntags=ntags)
+
+    def get_args(self):
+        return 'threshold: {}, max_index: {}'.format(
+            self.threshold, self.max_index)
+
+    def _filter_multilabels(self, X, y):
+        new_X = []
+        new_y = []
+        for data, labels in zip(X, y):
+            if isinstance(labels, list) and len(labels) == 1:
+                new_X.append(data)
+                new_y.append(labels[0])
+            elif isinstance(labels, str):
+                new_X.append(data)
+                new_y.append(labels)
+        return new_X, new_y
 
     def _transform_anthony_intersection(self, changesets, labels):
         res = dict()
@@ -246,7 +285,6 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
     See description of <get_rules_per_label> for more details.
     """
     rules = dict()
-    print(len(label_to_token_groups))
     for label in label_to_token_groups:
         rules[label] = get_rules_per_label(
             label, label_to_tokens, token_to_labels,
