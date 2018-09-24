@@ -7,15 +7,21 @@ import logging
 class RuleBased:
     """ scikit-style wrapper """
     def __init__(self, threshold=0.5, max_index=20, string_rules=False,
-                 unknown_label='???'):
+                 unknown_label='???', filter_method='vlad'):
         self.threshold = threshold
         self.max_index = max_index
         self.string_rules = string_rules
         self.unknown_label = unknown_label
+        self.filter_method = filter_method
 
     def fit(self, X, y, csids=None):
         X, y = self._filter_multilabels(X, y)
-        label_to_tokens = self._transform_anthony_intersection(X, y)
+        if self.filter_method == 'vlad':
+            label_to_tokens = self._transform_anthony_intersection(X, y)
+        elif self.filter_method == 'intersect':
+            label_to_tokens = self._intersect_packages(X, y)
+        else:
+            raise ValueError("Unknown filter method %s" % self.filter_method)
         # # Filter out labels given by yum that refer to i686 architecture
         # label_to_tokens = {k: v for k, v in label_to_tokens.items()
         #                    if k[-5:] != '.i686'}
@@ -106,6 +112,16 @@ class RuleBased:
                 new_X.append(data)
                 new_y.append(labels)
         return new_X, new_y
+
+    def _intersect_packages(self, changesets, labels):
+        """Keep only files present in every instance of a package."""
+        res = dict()
+        for data, label in zip(changesets, labels):
+            if label in res:
+                res[label] &= set(data)
+            else:
+                res[label] = set(data)
+        return res
 
     def _transform_anthony_intersection(self, changesets, labels):
         res = dict()
