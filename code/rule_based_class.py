@@ -109,6 +109,7 @@ class RuleBased:
 
     def _transform_anthony_intersection(self, changesets, labels):
         res = dict()
+        # res[package_name][file_name] = no. of occurances
         for data, label in zip(changesets, labels):
             for token in data:
                 if label not in res:
@@ -118,6 +119,8 @@ class RuleBased:
                 else:
                     res[label][token] += 1
         newres = dict()
+        # newres[package_name] = set(file_names) s.t.
+        # freq. of file satisfies mystery_vlad_condition
         for label in res:
             newres[label] = set()
             maxval = max(res[label].values())
