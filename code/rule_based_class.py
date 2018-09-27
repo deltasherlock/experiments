@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from collections import OrderedDict
+from ordered_set import OrderedSet
 import logging
 
 
@@ -35,8 +37,10 @@ class RuleBased:
         duplicates = get_duplicates(label_to_tokens, token_to_labels,
                                     label_to_token_groups)
         # Filter out duplicates from the corpus
-        label_to_tokens = {k: v for k, v in label_to_tokens.items()
-                           if k not in duplicates}
+        label_to_tokens = OrderedDict()
+        for k, v in label_to_tokens.items():
+            if k not in duplicates:
+                OrderedDict[k] = v
         # Again get the inverse map
         token_to_labels = get_token_to_labels(label_to_tokens)
         # Again get the map from labels to categorized tokens
@@ -48,7 +52,10 @@ class RuleBased:
                           string_rules=self.string_rules)
 
         # Filter out rules for labels that are not in Anthony's data
-        self.rules = {k: v for k, v in rules.items() if k in y}
+        self.rules = OrderedDict()
+        for k, v in rules.items():
+            if k in y:
+                self.rules[k] = v
         logging.info('Finished rule generation')
 
     def predict(self, X, csids=None, ntags=None):
@@ -117,32 +124,32 @@ class RuleBased:
 
     def _intersect_packages(self, changesets, labels):
         """Keep only files present in every instance of a package."""
-        res = dict()
+        res = OrderedDict()
         for data, label in zip(changesets, labels):
             if label in res:
-                res[label] &= set(data)
+                res[label] &= OrderedSet(data)
                 if not len(res[label]):
                     logging.warning("No common files for package %s" % label)
             else:
-                res[label] = set(data)
+                res[label] = OrderedSet(data)
         return res
 
     def _transform_anthony_intersection(self, changesets, labels, take_max=False):
-        res = dict()
+        res = OrderedDict()
         # res[package_name][file_name] = no. of occurances
         for data, label in zip(changesets, labels):
             for token in data:
                 if label not in res:
-                    res[label] = dict()
+                    res[label] = OrderedDict()
                 if token not in res[label]:
                     res[label][token] = 1
                 else:
                     res[label][token] += 1
-        newres = dict()
+        newres = OrderedDict()
         # newres[package_name] = set(file_names) s.t.
         # freq. of file satisfies mystery_vlad_condition
         for label in res:
-            newres[label] = set()
+            newres[label] = OrderedSet()
             maxval = max(res[label].values())
             for token in sorted(res[label], key=res[label].get, reverse=True):
                 mystery_vlad_condition = (
@@ -175,11 +182,11 @@ def get_token_to_labels(label_to_tokens):
     """
     Returns the inverse map: a dictionary from tokens to sets of labels.
     """
-    token_to_labels = dict()
+    token_to_labels = OrderedDict()
     for label in label_to_tokens:
         for token in label_to_tokens[label]:
             if token not in token_to_labels:
-                token_to_labels[token] = set()
+                token_to_labels[token] = OrderedSet()
             token_to_labels[token].add(label)
     return token_to_labels
 
@@ -190,14 +197,14 @@ def get_label_to_token_groups(token_to_labels):
     of tokens. These groups are indexed with natural numbers. Index of a
     group shows in how many labels each token from this group is present.
     """
-    label_to_token_groups = dict()
+    label_to_token_groups = OrderedDict()
     for token in token_to_labels:
         for label in token_to_labels[token]:
             index = len(token_to_labels[token])
             if label not in label_to_token_groups:
-                label_to_token_groups[label] = dict()
+                label_to_token_groups[label] = OrderedDict()
             if index not in label_to_token_groups[label]:
-                label_to_token_groups[label][index] = set()
+                label_to_token_groups[label][index] = OrderedSet()
             label_to_token_groups[label][index].add(token)
     return label_to_token_groups
 
@@ -208,7 +215,7 @@ def get_duplicates(label_to_tokens, token_to_labels, label_to_token_groups):
     labels. From each group of identical labels one label goes to
     representatives. All the other labels from each group go to <duplicates>.
     """
-    duplicates = set()
+    duplicates = OrderedSet()
     for label in sorted(label_to_tokens.keys()):
         if label in duplicates:
             continue
@@ -256,7 +263,7 @@ def get_rules_per_label(label, label_to_tokens, token_to_labels,
     """
     assert (label in label_to_token_groups)
     rules = []
-    used_tokens = set()
+    used_tokens = OrderedSet()
     for index in sorted(label_to_token_groups[label].keys()):
         if index > max_index and max_index > 0:
             break
@@ -311,7 +318,7 @@ def get_rules(label_to_tokens, token_to_labels, label_to_token_groups,
 
     See description of <get_rules_per_label> for more details.
     """
-    rules = dict()
+    rules = OrderedDict()
     for label in label_to_token_groups:
         rules[label] = get_rules_per_label(
             label, label_to_tokens, token_to_labels,
