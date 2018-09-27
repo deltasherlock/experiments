@@ -20,6 +20,8 @@ class RuleBased:
             label_to_tokens = self._transform_anthony_intersection(X, y)
         elif self.filter_method == 'intersect':
             label_to_tokens = self._intersect_packages(X, y)
+        elif self.filter_method == 'take_max':
+            label_to_tokens = self._transform_anthony_intersection(X, y, take_max=True)
         else:
             raise ValueError("Unknown filter method %s" % self.filter_method)
         # # Filter out labels given by yum that refer to i686 architecture
@@ -119,11 +121,13 @@ class RuleBased:
         for data, label in zip(changesets, labels):
             if label in res:
                 res[label] &= set(data)
+                if not len(res[label]):
+                    logging.warning("No common files for package %s" % label)
             else:
                 res[label] = set(data)
         return res
 
-    def _transform_anthony_intersection(self, changesets, labels):
+    def _transform_anthony_intersection(self, changesets, labels, take_max=False):
         res = dict()
         # res[package_name][file_name] = no. of occurances
         for data, label in zip(changesets, labels):
@@ -157,8 +161,12 @@ class RuleBased:
                     (res[label][token] < 0.5 * maxval
                         and len(newres[label]) >= 6)
                 )
-                if mystery_vlad_condition:
-                    break
+                if take_max:
+                    if res[label][token] != maxval:
+                        break
+                else:
+                    if mystery_vlad_condition:
+                        break
                 newres[label].add(token)
         return newres
 
