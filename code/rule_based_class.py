@@ -37,10 +37,9 @@ class RuleBased:
         duplicates = get_duplicates(label_to_tokens, token_to_labels,
                                     label_to_token_groups)
         # Filter out duplicates from the corpus
-        label_to_tokens = OrderedDict()
-        for k, v in label_to_tokens.items():
-            if k not in duplicates:
-                OrderedDict[k] = v
+        for k in label_to_tokens:
+            if k in duplicates:
+                del label_to_tokens[k]
         # Again get the inverse map
         token_to_labels = get_token_to_labels(label_to_tokens)
         # Again get the map from labels to categorized tokens
