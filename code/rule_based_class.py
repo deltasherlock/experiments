@@ -8,13 +8,14 @@ import logging
 
 class RuleBased:
     """ scikit-style wrapper """
-    def __init__(self, threshold=0.5, max_index=20, string_rules=False,
+    def __init__(self, threshold=0.5, num_rules=1, max_index=20, string_rules=False,
                  unknown_label='???', filter_method='vlad'):
         self.threshold = threshold
         self.max_index = max_index
         self.string_rules = string_rules
         self.unknown_label = unknown_label
         self.filter_method = filter_method
+        self.num_rules = num_rules
 
     def fit(self, X, y, csids=None):
         X, y = self._filter_multilabels(X, y)
@@ -46,7 +47,7 @@ class RuleBased:
         label_to_token_groups = get_label_to_token_groups(token_to_labels)
         # Generate rules for all labels
         rules = get_rules(label_to_tokens, token_to_labels,
-                          label_to_token_groups, limit=1,
+                          label_to_token_groups, limit=self.num_rules,
                           max_index=self.max_index,
                           string_rules=self.string_rules)
 
@@ -106,8 +107,8 @@ class RuleBased:
         return self.predict(X, ntags=ntags)
 
     def get_args(self):
-        return 'threshold: {}, max_index: {}'.format(
-            self.threshold, self.max_index)
+        return 'threshold: {}, max_index: {}, num_rules: {}'.format(
+            self.threshold, self.max_index, self.num_rules)
 
     def _filter_multilabels(self, X, y):
         new_X = []
