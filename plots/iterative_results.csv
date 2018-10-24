@@ -3,11 +3,7 @@ DeltaSherlock,20,1.0,1.0
 DeltaSherlock,40,1.0,1.0
 DeltaSherlock,60,1.0,1.0
 DeltaSherlock,80,1.0,1.0
-Praxi - Retraining,20,0.988,0.987
-Praxi - Retraining,40,0.989,0.988
-Praxi - Retraining,60,0.989,0.989
-Praxi - Retraining,80,0.992,0.991
-Praxi - Iterative,20,0.988,0.987
-Praxi - Iterative,40,0.989,0.988
-Praxi - Iterative,60,0.989,0.989
-Praxi - Iterative,80,0.992,0.991
+Praxi,20,0.988,0.987
+Praxi,40,0.989,0.988
+Praxi,60,0.989,0.989
+Praxi,80,0.992,0.991
