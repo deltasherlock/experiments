@@ -1,0 +1,37 @@
+Method,Arrangement,Chunk,CS Load,Total,Total Train,Total Test
+DeltaSherlock,0,0,164.62,212.32,42.419999999999995,5.28
+DeltaSherlock,0,1,445.58,573.17,112.72,14.87
+DeltaSherlock,0,2,660.5,857.59,174.03,23.060000000000002
+DeltaSherlock,0,3,849.37,1102.6,221.62,31.599999999999998
+DeltaSherlock,1,0,160.22,207.14,41.38,5.54
+DeltaSherlock,1,1,438.39,560.23,105.87,15.95
+DeltaSherlock,1,2,657.03,846.71,164.43,25.25
+DeltaSherlock,1,3,850.03,1092.18,208.03,34.12
+DeltaSherlock,2,0,161.55,204.43,36.49999999999999,6.380000000000001
+DeltaSherlock,2,1,440.97,562.0,105.55,15.48
+DeltaSherlock,2,2,657.71,849.97,167.37,24.88
+DeltaSherlock,2,3,844.05,1084.93,207.12,33.760000000000005
+Praxi - Iterative,0,0,0.0,0,49.136918,18.2622150
+Praxi - Iterative,0,1,0.0,0,91.497412,32.9535131
+Praxi - Iterative,0,2,0.0,0,67.699734,26.4058292
+Praxi - Iterative,0,3,0.0,0,54.448608,21.3193493
+Praxi - Iterative,1,0,0.0,0,46.988626,19.6443880
+Praxi - Iterative,1,1,0.0,0,86.949657,34.6843991
+Praxi - Iterative,1,2,0.0,0,65.159995,29.6725102
+Praxi - Iterative,1,3,0.0,0,54.066449,24.9960653
+Praxi - Iterative,2,0,0.0,0,50.299714,15.5567520
+Praxi - Iterative,2,1,0.0,0,79.331282,39.3054551
+Praxi - Iterative,2,2,0.0,0,60.098988,32.4467202
+Praxi - Iterative,2,3,0.0,0,51.140888,27.1267193
+Praxi - From Scratch,0,0,0.0,0,40.587198,18.124726
+Praxi - From Scratch,0,1,0.0,0,85.690984,33.592354
+Praxi - From Scratch,0,2,0.0,0,102.697664,26.328716
+Praxi - From Scratch,0,3,0.0,0,97.051235,23.323723
+Praxi - From Scratch,1,0,0.0,0,39.259680,19.154113
+Praxi - From Scratch,1,1,0.0,0,84.164838,34.476593
+Praxi - From Scratch,1,2,0.0,0,95.513893,29.846884
+Praxi - From Scratch,1,3,0.0,0,106.826213,27.920916
+Praxi - From Scratch,2,0,0.0,0,43.129558,15.520437
+Praxi - From Scratch,2,1,0.0,0,83.442293,40.531261
+Praxi - From Scratch,2,2,0.0,0,78.934984,33.463885
+Praxi - From Scratch,2,3,0.0,0,79.880353,29.372419
